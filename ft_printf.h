@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:20:52 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/16 21:22:31 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/16 22:30:37 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
+# include <stdarg.h>
 
 int	ft_printf(const char *, ...);
+
+// STRING UTLS
+size_t	ft_strlen(const char *s);
 
 #endif
