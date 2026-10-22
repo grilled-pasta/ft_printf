@@ -34,7 +34,7 @@ int	format_int(va_list args)
 	return (ft_putnbr(temp, 0));
 }
 
-int	format_uint(va_list args)
+int	format_u(va_list args)
 {
 	unsigned int	temp;
 
@@ -42,7 +42,7 @@ int	format_uint(va_list args)
 	return (ft_putunbr(temp, 0));
 }
 
-int	format_uint_hex(va_list args, char format)
+int	format_x(va_list args, char format)
 {
 	unsigned int	temp;
 

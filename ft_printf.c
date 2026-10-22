@@ -26,14 +26,11 @@ int	handle_formatter(char format, va_list args)
 	else if (format == 'd' || format == 'i')
 		return (format_int(args));
 	else if (format == 'u')
-		return (format_uint(args));
+		return (format_u(args));
 	else if (format == 'x' || format == 'X')
-		return (format_uint_hex(args, format));
+		return (format_x(args, format));
 	else if (format == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
+		return (put_char('%'));
 	return (0);
 }
 
@@ -53,10 +50,7 @@ int	ft_printf(const char *format, ...)
 			res += handle_formatter(*format, args);
 		}
 		else
-		{
-			write(1, format, 1);
-			res++;
-		}
+			res += put_char(*format);
 		format++;
 	}
 	va_end(args);
