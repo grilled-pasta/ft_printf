@@ -6,7 +6,7 @@
 #    By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/16 21:18:17 by alkonsta          #+#    #+#              #
-#    Updated: 2026/10/16 21:19:26 by alkonsta         ###   ########.fr        #
+#    Updated: 2026/10/23 00:54:19 by alkonsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_printf.c \
-       str_utils.c
+       str_utils.c \
+       formatters_int.c \
+       formatters_char.c
 
 OBJDIR = ./libftprintf
 OBJS = $(SRCS:.c=.o)
