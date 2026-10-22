@@ -25,12 +25,13 @@ int		ft_putnbr_hex(unsigned long n, int hex_case, int is_p);
 int		ft_putnbr(int n, int length);
 int		ft_putunbr(unsigned int n, int length);
 // formatters_char 
+int		put_char(char c);
 int		format_c(va_list args);
 int		format_s(va_list args);
 // formatters_int
 int		format_p(va_list args);
 int		format_int(va_list args);
-int		format_uint(va_list args);
-int		format_uint_hex(va_list args, char format);
+int		format_u(va_list args);
+int		format_x(va_list args, char format);
 
 #endif

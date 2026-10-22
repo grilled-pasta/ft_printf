@@ -12,22 +12,29 @@
 
 #include "ft_printf.h"
 
+int	put_char(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
 int	format_c(va_list args)
 {
 	char	temp;
 
 	temp = (char) va_arg(args, int);
-	write(1, &temp, sizeof(char));
-	return (1);
+	return (put_char(temp));
 }
 
 int	format_s(va_list args)
 {
 	char	*temp;
+	size_t	len;
 
 	temp = (char *) va_arg(args, char *);
 	if (!temp)
 		temp = "(null)";
-	write(1, temp, ft_strlen(temp));
-	return (ft_strlen(temp));
+	len = ft_strlen(temp);
+	write(1, temp, len);
+	return (len);
 }
