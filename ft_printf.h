@@ -18,9 +18,11 @@
 # include <stddef.h>
 # include <stdarg.h>
 
-int	ft_printf(const char *, ...);
-
-// STRING UTLS
+int		ft_printf(const char *format, ...);
+// str_utils.c
 size_t	ft_strlen(const char *s);
+int		ft_putnbr_hex(unsigned long n, int hex_case, int is_p);
+int		ft_putnbr(int n, int length);
+int		ft_putunbr(unsigned int n, int length);
 
 #endif
