@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:19:41 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 21:37:49 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 21:43:11 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	ft_printf(const char *format, ...)
 		else
 			temp = ft_putchar(*format);
 		if (temp < 0)
-			return (handle_error(temp));
+			return (va_end(args), handle_error(temp));
 		if (INT_MAX - length < temp)
-			return (handle_error(EOVERFLOW));
+			return (va_end(args), handle_error(EOVERFLOW));
 		length += temp;
 		format++;
 	}
