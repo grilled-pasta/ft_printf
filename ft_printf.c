@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:19:41 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 20:49:14 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 21:37:49 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <stdint.h>
+#include <errno.h>
+#include <limits.h>
 
 int	handle_formatter(char format, va_list args)
 {
@@ -34,6 +36,12 @@ int	handle_formatter(char format, va_list args)
 	return (0);
 }
 
+int	handle_error(int error)
+{
+	errno = error;
+	return (error);
+}
+
 /* %[flags][width][.precision][length]specifier */
 int	ft_printf(const char *format, ...)
 {
@@ -42,7 +50,6 @@ int	ft_printf(const char *format, ...)
 	int		temp;
 
 	length = 0;
-	temp = 0;
 	va_start(args, format);
 	while (format && *format)
 	{
@@ -54,7 +61,9 @@ int	ft_printf(const char *format, ...)
 		else
 			temp = ft_putchar(*format);
 		if (temp < 0)
-			return (temp);
+			return (handle_error(temp));
+		if (INT_MAX - length < temp)
+			return (handle_error(EOVERFLOW));
 		length += temp;
 		format++;
 	}
