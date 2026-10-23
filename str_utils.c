@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 22:29:31 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/16 22:29:55 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 20:38:08 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ size_t	ft_strlen(const char *s)
 	return (length);
 }
 
-int		ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	return (write(1, &c, 1));
 }
 
-int		ft_putnbr_base(unsigned long n, char *base)
+int	ft_putnbr_base(unsigned long n, char *base)
 {
 	int		length;
 	size_t	base_length;
