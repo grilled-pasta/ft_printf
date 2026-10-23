@@ -15,86 +15,30 @@
 #include <stddef.h>
 #include <stdio.h>
 
+size_t	ft_putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
 size_t	ft_strlen(const char *s)
 {
-	size_t	len;
+	size_t	length;
 
-	len = 0;
-	while (s && s[len])
-		len++;
-	return (len);
+	length = 0;
+	while (s && s[length])
+		length++;
+	return (length);
 }
 
-static int	ft_putnbr_hex_x(unsigned long n, char *hex, int length)
+size_t	ft_putnbr_base(unsigned long n, char *base)
 {
-	unsigned long	nb;
-	char			temp;
+	size_t	length;
+	size_t	base_length;
 
-	nb = n;
-	if (nb >= 16)
-		length = ft_putnbr_hex_x(nb / 16, hex, length);
-	temp = hex[nb % 16];
-	write(1, &temp, 1);
-	return (length + 1);
-}
-
-int	ft_putnbr_hex(unsigned long n, int hex_case, int is_p)
-{
-	static char	*hex[] = {"0123456789abcdef", "0123456789ABCDEF"};
-	char		temp;
-	int			res;
-
-	res = 0;
-	if (hex_case < 0 || hex_case > 1)
-		hex_case = 0;
-	if (is_p)
-	{
-		temp = '0';
-		write(1, &temp, 1);
-		temp = 'x';
-		write(1, &temp, 1);
-		res += 2;
-	}
-	res += ft_putnbr_hex_x(n, hex[hex_case], 0);
-	return (res);
-}
-
-int	ft_putnbr(int n, int length)
-{
-	long	nb;
-	char	temp;
-
-	nb = n;
-	if (n < 0)
-	{
-		temp = '-';
-		write(1, &temp, 1);
-		nb = -nb;
-		length = length + 1;
-	}
-	if (nb > 9)
-		length = ft_putnbr(nb / 10, length);
-	temp = '0' + (nb % 10);
-	write(1, &temp, 1);
-	return (length + 1);
-}
-
-int	ft_putunbr(unsigned int n, int length)
-{
-	long	nb;
-	char	temp;
-
-	nb = n;
-	if (n < 0)
-	{
-		temp = '-';
-		write(1, &temp, 1);
-		nb = -nb;
-		length = length + 1;
-	}
-	if (nb > 9)
-		length = ft_putnbr(nb / 10, length);
-	temp = '0' + (nb % 10);
-	write(1, &temp, 1);
-	return (length + 1);
+	length = 0;
+	base_length = ft_strlen(base);
+	if (n >= base_length)
+		length = ft_putnbr_base(n / base_length, base);
+	length += write(1, &base[n % base_length], 1);
+	return (length);
 }

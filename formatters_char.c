@@ -12,29 +12,23 @@
 
 #include "ft_printf.h"
 
-int	put_char(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	format_c(va_list args)
+size_t	format_c(va_list args)
 {
 	char	temp;
 
 	temp = (char) va_arg(args, int);
-	return (put_char(temp));
+	return (ft_putchar(temp));
 }
 
-int	format_s(va_list args)
+size_t	format_s(va_list args)
 {
 	char	*temp;
-	size_t	len;
+	size_t	length;
 
 	temp = (char *) va_arg(args, char *);
 	if (!temp)
 		temp = "(null)";
-	len = ft_strlen(temp);
-	write(1, temp, len);
-	return (len);
+	length = ft_strlen(temp);
+	write(1, temp, length);
+	return (length);
 }

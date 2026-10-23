@@ -12,40 +12,48 @@
 
 #include "ft_printf.h"
 
-int	format_p(va_list args)
+size_t	format_p(va_list args)
 {
 	void	*temp;
+	size_t	length;
 
 	temp = va_arg(args, void *);
+	length = 0;
 	if (!temp)
-	{
-		temp = "(nil)";
-		write(1, temp, ft_strlen(temp));
-		return (ft_strlen(temp));
-	}
-	return (ft_putnbr_hex((unsigned long) temp, 0, 1));
+		return (write(1, "(nil)", 5));
+	length += ft_putchar('0');
+	length += ft_putchar('x');
+	return (ft_putnbr_base((unsigned long) temp, BASE_16_L) + length);
 }
 
-int	format_int(va_list args)
+size_t	format_int(va_list args)
 {
-	int	temp;
+	int		temp;
+	long	n;
 
 	temp = va_arg(args, int);
-	return (ft_putnbr(temp, 0));
+	n = temp;
+	if (n < 0)
+		return (ft_putchar('-') + ft_putnbr_base(-n, BASE_10));
+	return (ft_putnbr_base(n, BASE_10));
 }
 
-int	format_u(va_list args)
+size_t	format_u(va_list args)
 {
 	unsigned int	temp;
 
 	temp = va_arg(args, unsigned int);
-	return (ft_putunbr(temp, 0));
+	return (ft_putnbr_base(temp, BASE_10));
 }
 
-int	format_x(va_list args, char format)
+size_t	format_x(va_list args, char format)
 {
 	unsigned int	temp;
+	long			n;
 
 	temp = va_arg(args, unsigned int);
-	return (ft_putnbr_hex(temp, format == 'X', 0));
+	n = temp;
+	if (format == 'X')
+		return (ft_putnbr_base(n, BASE_16_U));
+	return (ft_putnbr_base(n, BASE_16_L));
 }

@@ -30,29 +30,29 @@ int	handle_formatter(char format, va_list args)
 	else if (format == 'x' || format == 'X')
 		return (format_x(args, format));
 	else if (format == '%')
-		return (put_char('%'));
+		return (ft_putchar('%'));
 	return (0);
 }
 
 /* %[flags][width][.precision][length]specifier */
 int	ft_printf(const char *format, ...)
 {
-	va_list			args;
-	size_t			res;
+	va_list	args;
+	size_t	length;
 
-	res = 0;
+	length = 0;
 	va_start(args, format);
 	while (format && *format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			res += handle_formatter(*format, args);
+			length += handle_formatter(*format, args);
 		}
 		else
-			res += put_char(*format);
+			length += ft_putchar(*format);
 		format++;
 	}
 	va_end(args);
-	return (res);
+	return (length);
 }
