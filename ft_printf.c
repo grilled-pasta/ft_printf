@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:19:41 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 00:49:17 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 20:39:17 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	handle_formatter(char format, va_list args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int	length;
+	int		length;
 
 	length = 0;
 	va_start(args, format);
 	while (format && *format)
 	{
-		if (*format == '%')
+		if (*format == '%' && *(format + 1))
 		{
 			format++;
 			length += handle_formatter(*format, args);
