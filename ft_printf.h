@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:20:52 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 00:54:47 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 21:14:34 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		ft_printf(const char *format, ...);
 // str_utils
 size_t	ft_strlen(const char *s);
 int		ft_putchar(char c);
+int		ft_putstr(char	*s);
 int		ft_putnbr_base(unsigned long n, char *base);
 // formatters_char 
 int		format_c(va_list args);

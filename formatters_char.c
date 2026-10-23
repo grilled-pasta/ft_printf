@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 00:52:53 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 00:53:16 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 21:27:37 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	format_s(va_list args)
 	temp = (char *) va_arg(args, char *);
 	if (!temp)
 		temp = "(null)";
-	length = ft_strlen(temp);
-	write(1, temp, length);
+	length = ft_putstr(temp);
+	if (length < 0)
+		return (-1);
 	return (length);
 }
