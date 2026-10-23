@@ -15,11 +15,6 @@
 #include <stddef.h>
 #include <stdio.h>
 
-size_t	ft_putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	length;
@@ -30,9 +25,14 @@ size_t	ft_strlen(const char *s)
 	return (length);
 }
 
-size_t	ft_putnbr_base(unsigned long n, char *base)
+int		ft_putchar(char c)
 {
-	size_t	length;
+	return (write(1, &c, 1));
+}
+
+int		ft_putnbr_base(unsigned long n, char *base)
+{
+	int		length;
 	size_t	base_length;
 
 	length = 0;

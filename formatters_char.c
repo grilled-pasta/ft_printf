@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-size_t	format_c(va_list args)
+int	format_c(va_list args)
 {
 	char	temp;
 
@@ -20,10 +20,10 @@ size_t	format_c(va_list args)
 	return (ft_putchar(temp));
 }
 
-size_t	format_s(va_list args)
+int	format_s(va_list args)
 {
 	char	*temp;
-	size_t	length;
+	int		length;
 
 	temp = (char *) va_arg(args, char *);
 	if (!temp)

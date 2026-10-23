@@ -12,10 +12,10 @@
 
 #include "ft_printf.h"
 
-size_t	format_p(va_list args)
+int	format_p(va_list args)
 {
 	void	*temp;
-	size_t	length;
+	int		length;
 
 	temp = va_arg(args, void *);
 	length = 0;
@@ -26,7 +26,7 @@ size_t	format_p(va_list args)
 	return (ft_putnbr_base((unsigned long) temp, BASE_16_L) + length);
 }
 
-size_t	format_int(va_list args)
+int	format_int(va_list args)
 {
 	int		temp;
 	long	n;
@@ -38,7 +38,7 @@ size_t	format_int(va_list args)
 	return (ft_putnbr_base(n, BASE_10));
 }
 
-size_t	format_u(va_list args)
+int	format_u(va_list args)
 {
 	unsigned int	temp;
 
@@ -46,7 +46,7 @@ size_t	format_u(va_list args)
 	return (ft_putnbr_base(temp, BASE_10));
 }
 
-size_t	format_x(va_list args, char format)
+int	format_x(va_list args, char format)
 {
 	unsigned int	temp;
 	long			n;

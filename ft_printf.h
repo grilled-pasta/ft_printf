@@ -25,15 +25,15 @@
 int		ft_printf(const char *format, ...);
 // str_utils
 size_t	ft_strlen(const char *s);
-size_t	ft_putchar(char c);
-size_t	ft_putnbr_base(unsigned long n, char *base);
+int		ft_putchar(char c);
+int		ft_putnbr_base(unsigned long n, char *base);
 // formatters_char 
-size_t	format_c(va_list args);
-size_t	format_s(va_list args);
+int		format_c(va_list args);
+int		format_s(va_list args);
 // formatters_int
-size_t	format_p(va_list args);
-size_t	format_int(va_list args);
-size_t	format_u(va_list args);
-size_t	format_x(va_list args, char format);
+int		format_p(va_list args);
+int		format_int(va_list args);
+int		format_u(va_list args);
+int		format_x(va_list args, char format);
 
 #endif

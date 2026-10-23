@@ -38,7 +38,7 @@ int	handle_formatter(char format, va_list args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	size_t	length;
+	int	length;
 
 	length = 0;
 	va_start(args, format);
