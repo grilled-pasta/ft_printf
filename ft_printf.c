@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:19:41 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 21:43:11 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/23 22:15:25 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	handle_formatter(char format, va_list args)
 		return (format_x(args, format));
 	else if (format == '%')
 		return (ft_putchar('%'));
-	return (0);
+	return (-1);
 }
 
 int	handle_error(int error)
