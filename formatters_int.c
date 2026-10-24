@@ -21,7 +21,7 @@ int	format_p(va_list args, t_specs specs)
 
 	temp = va_arg(args, void *);
 	if (!temp)
-		return (ft_putstr("(nil)"));
+		return (format_specs("(nil)", 5, specs));
 	buffer[0] = '0';
 	buffer[1] = 'x';
 	length = ft_putnbr_base((unsigned long) temp, BASE_16_L, buffer + 2);

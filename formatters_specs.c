@@ -18,34 +18,63 @@ int	spec_isint(char c)
 	return (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X');
 }
 
-int	format_min_width(char **s, int length, t_specs specs)
+int	format_min_width(char **s, int length, char pad_c, t_specs specs)
 {
 	int 	str_length;
 	int		i;
+	int		sign;
 
 	str_length = length;
 	i = 0;
-	while (specs.min_width - i > str_length && !specs.flags.left_justify)
-	{
+	sign = 0;
+	if (spec_isint(specs.specifier) && **s != '-' && (specs.flags.plus || specs.flags.space))
+		sign = 1;
+	while (specs.min_width - i - sign > str_length && !specs.flags.left_justify)
+	{			
 		if (spec_isint(specs.specifier) && specs.flags.leading_zeroes)
-		{	
+		{			
+			// if (specs.flags.plus)
+			// {
+			// 	if (ft_putchar('+') < 0)
+			// 		return (-1);
+			// 	(*s)++;
+			// } 
+			// else if (specs.flags.space)
+			// {
+			// 	if (ft_putchar(' ') < 0)
+			// 		return (-1);
+			// 	(*s)++;
+			// }
 			if (**s == '-')
 			{
 				if (ft_putchar('-') < 0)
 					return (-1);
 				(*s)++;
 			}
-			if (ft_putchar('0') < 0)
+			if (ft_putchar(pad_c) < 0)
 				return (-1);
 		}
 		else
 		{
-			if (ft_putchar(' ') < 0)
+			if (ft_putchar(pad_c) < 0)
 				return (-1);
 		}
 		i++;
+	}	
+	if (spec_isint(specs.specifier))
+	{
+		if (specs.flags.plus)
+		{
+			if (ft_putchar('+') < 0)
+				return (-1);
+		} 
+		else if (specs.flags.space)
+		{
+			if (ft_putchar(' ') < 0)
+				return (-1);
+		}
 	}
-	return (i);
+	return (i + sign);
 }
 
 int	format_min_width_left_justify(int length, t_specs specs)
@@ -71,17 +100,24 @@ int	format_specs(char *s, int length, t_specs specs)
 
 	w_length = 0;
 	s_length = length;
+	// printf("\n~~leading_zeroes: %d\n", specs.flags.leading_zeroes);
+	// printf("~~spec_isint(%c) %d\n", specs.specifier, spec_isint(specs.specifier));
+	// printf("~~specs.flags.left_justify: %d\n", specs.flags.left_justify);
+	// printf("~~precision: %d\n", specs.precision);
+	if (specs.precision >= 0)
+		if (specs.precision < s_length && specs.specifier == 's')
+			s_length = specs.precision;
 	if (specs.min_width)
-		w_length += format_min_width(&s, length, specs);
-	if (length == 1)
 	{
-		if (ft_putchar(*s) < 0)
-			return (-1);
+		if (spec_isint(specs.specifier) && specs.flags.leading_zeroes
+				&& !specs.flags.left_justify && specs.precision < 0) 
+			w_length += format_min_width(&s, s_length, '0', specs);
+		else
+			w_length += format_min_width(&s, s_length, ' ', specs);
 	}
-	else 
-		if (ft_putstr(s) < 0)
+	if (ft_putnstr(s, s_length + 1) < 0)
 			return (-1);
 	if (specs.flags.left_justify)
-		w_length += format_min_width_left_justify(length, specs);
+		w_length += format_min_width_left_justify(s_length, specs);
 	return (w_length + s_length);
 }

@@ -37,7 +37,7 @@
 
 int	is_flag(char c)
 {
-	return (c == '-' || c == '0' || c == '+' || c == '#');
+	return (c == '-' || c == '0' || c == '+' || c == ' ' || c == '#');
 }
 
 t_flags		parse_flags(const char **format)
@@ -45,8 +45,9 @@ t_flags		parse_flags(const char **format)
 	t_flags	flags = {
 		.left_justify=0, 
 		.leading_zeroes=0, 
-		.plus=0, 
-		.hashtag = 0
+		.plus=0,
+		.space=0,
+		.hashtag=0
 	};
 	while (**format && is_flag(**format))
 	{
@@ -56,6 +57,8 @@ t_flags		parse_flags(const char **format)
 			flags.leading_zeroes = 1;
 		else if (**format == '+')
 			flags.plus = 1;
+		else if (**format == ' ')
+			flags.space = 1;
 		else if (**format == '#')
 			flags.hashtag = 1;
 		(*format)++;
@@ -80,22 +83,18 @@ t_specs	parse_specs(const char **format)
 {
 	// t_specs	specs;
 	int		width;
+	int		precision;
 	t_flags	flags;
 
 	flags = parse_flags(format);
 	t_specs specs = {
 		.flags=flags, 
-		.min_width=0,
-		.precision=0,
+		.min_width=-1,
+		.precision=-1,
 		.length=0,
 		.specifier=0
 	};
 
-	// if (**format == '-')
-	// {
-	// 	specs.flags.left_justify = 1;
-	// 	(*format)++;
-	// }
 	width = 0;
 	while (**format && ft_isdigit(**format))
 	{
@@ -103,6 +102,19 @@ t_specs	parse_specs(const char **format)
 		(*format)++;
 	}
 	specs.min_width = width;
+	precision = 0;
+	if (**format == '.')
+	{
+		(*format)++;
+		while (**format && ft_isdigit(**format))
+		{
+			precision = precision * 10 + (**format - '0');
+			(*format)++;
+		}
+		specs.precision = precision;
+	}
+	while (**format && !ft_isspec(**format))
+		(*format)++;
 	// check others
 	if (**format && ft_isspec(**format))
 		specs.specifier = **format;

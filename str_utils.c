@@ -35,6 +35,16 @@ int	ft_putstr(char	*s)
 	return (write(1, s, ft_strlen(s)));
 }
 
+int	ft_putnstr(char	*s, int length)
+{
+	// char	temp;
+	//
+	// temp = '\0';
+	// write(1, s, length);
+	// write(1, &temp, 1);
+	return (write(1, s, length));
+}
+
 int	ft_putnbr_base(unsigned long n, char *base, char *buffer)
 {
 	int		length;
