@@ -6,7 +6,7 @@
 #    By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/16 21:18:17 by alkonsta          #+#    #+#              #
-#    Updated: 2026/10/24 03:48:10 by alkonsta         ###   ########.fr        #
+#    Updated: 2026/10/28 23:53:29 by alkonsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS = ft_printf.c \
        formatters_int.c \
        formatters_char.c \
        formatters_specs.c \
-       int_utils.c
+       spec_utils.c \
+       spec_parser.c
 
 OBJDIR = ./libftprintf
 OBJS = $(SRCS:.c=.o)

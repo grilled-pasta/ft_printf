@@ -37,11 +37,6 @@ int	ft_putstr(char	*s)
 
 int	ft_putnstr(char	*s, int length)
 {
-	// char	temp;
-	//
-	// temp = '\0';
-	// write(1, s, length);
-	// write(1, &temp, 1);
 	return (write(1, s, length));
 }
 

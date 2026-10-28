@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	format_p(va_list args, t_specs specs)
 {
 	void	*temp;
 	int		length;
-	char	buffer[67]; // "0x" + unsigned long bytes (64) + null-term
+	char	buffer[67];
 
 	temp = va_arg(args, void *);
 	if (!temp)
@@ -37,7 +36,7 @@ int	format_int(va_list args, t_specs specs)
 	long	n;
 	int		length;
 	int		sign;
-	char	buffer[12]; // int + minus + null-term
+	char	buffer[12];
 
 	temp = va_arg(args, int);
 	n = temp;
@@ -60,7 +59,7 @@ int	format_u(va_list args, t_specs specs)
 {
 	unsigned int	temp;
 	int				length;
-	char			buffer[12]; // int + minus + null-term
+	char			buffer[12];
 
 	temp = va_arg(args, unsigned int);
 	length = ft_putnbr_base(temp, BASE_10, buffer);
@@ -76,7 +75,7 @@ int	format_x(va_list args, char format, t_specs specs)
 	long			n;
 	char			*base;
 	int				length;
-	char			buffer[12]; // int + minus + null-term
+	char			buffer[12];
 
 	temp = va_arg(args, unsigned int);
 	n = temp;

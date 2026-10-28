@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:20:52 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/24 03:39:07 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/29 00:10:52 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,19 @@
 
 typedef struct s_flags
 {
-	int	left_justify;	// - left justify (right is default)
-	int	leading_zeroes; // 0 only int, ignored is left_justify present or for
-						// ints if precision is specified
-	int	plus; 			// + only signed int, ignored by others
+	int	left_justify;
+	int	leading_zeroes;
+	int	plus;
 	int	space;
-	int	hashtag;		// # alternative conversion, only non-decimal integer
+	int	hashtag;
 }				t_flags;
 
-typedef struct	s_specs
+typedef struct s_specs
 {
 	t_flags	flags;
-	int		min_width; // int or '*' padded with space chars
-	int		precision; // .(int or *) default is 0, negative is ignored
-	int		length;    // size of the argument?
-	char	specifier; // the format used, if invalid => undefined
+	int		min_width;
+	int		precision;
+	char	specifier;
 }				t_specs;
 
 int		ft_printf(const char *format, ...);
@@ -58,6 +56,12 @@ int		format_u(va_list args, t_specs specs);
 int		format_x(va_list args, char format, t_specs specs);
 // specs
 t_specs	parse_specs(const char **format);
+// spec_utils
+int		print_sign(char *s, t_specs specs);
+int		print_hex_prefix(char *s, t_specs specs);
+int		print_width(int length, t_specs specs);
+int		calc_extra_length(char *s, t_specs specs);
+int		print_string(char *s, int string_length, t_specs specs);
 // formatters_spec
 int		format_specs(char *s, int length, t_specs specs);
 

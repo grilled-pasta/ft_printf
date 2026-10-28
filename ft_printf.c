@@ -16,13 +16,14 @@
 #include <stdint.h>
 #include <errno.h>
 #include <limits.h>
-#include <stdio.h>
 
 int	handle_formatter(const char **format, va_list args)
 {
 	t_specs	specs;
 
 	specs = parse_specs(format);
+	if (!specs.specifier)
+		return (-1);
 	if (specs.specifier == 'c')
 		return (format_c(args, specs));
 	else if (specs.specifier == 's')
@@ -43,10 +44,10 @@ int	handle_formatter(const char **format, va_list args)
 int	handle_error(int error)
 {
 	errno = error;
+	ft_putstr("Invalid input\n");
 	return (error);
 }
 
-/* %[flags][width][.precision][length]specifier */
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
