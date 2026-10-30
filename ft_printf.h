@@ -6,7 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:20:52 by alkonsta          #+#    #+#             */
-/*   Updated: 2026/10/23 00:54:47 by alkonsta         ###   ########.fr       */
+/*   Updated: 2026/10/29 00:10:52 by alkonsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,45 @@
 # define BASE_16_U	"0123456789ABCDEF"
 
 # include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
 # include <stdarg.h>
 
+typedef struct s_flags
+{
+	int	left_justify;
+	int	leading_zeroes;
+	int	plus;
+	int	space;
+	int	hashtag;
+}				t_flags;
+
+typedef struct s_specs
+{
+	t_flags	flags;
+	int		min_width;
+	int		precision;
+	char	specifier;
+}				t_specs;
+
 int		ft_printf(const char *format, ...);
+t_specs	parse_specs(const char **format);
+// formatters_char 
+int		format_c(va_list args, t_specs specs);
+int		format_s(va_list args, t_specs specs);
+// formatters_int
+int		format_p(va_list args, t_specs specs);
+int		format_int(va_list args, t_specs specs);
+int		format_u(va_list args, t_specs specs);
+int		format_x(va_list args, t_specs specs);
+// formatters_spec
+int		format_specs(char *s, int length, t_specs specs);
 // str_utils
 size_t	ft_strlen(const char *s);
-size_t	ft_putchar(char c);
-size_t	ft_putnbr_base(unsigned long n, char *base);
-// formatters_char 
-size_t	format_c(va_list args);
-size_t	format_s(va_list args);
-// formatters_int
-size_t	format_p(va_list args);
-size_t	format_int(va_list args);
-size_t	format_u(va_list args);
-size_t	format_x(va_list args, char format);
+int		ft_putchar(char c);
+int		ft_putnstr(char	*s, int length);
+int		ft_putnbr_base(unsigned long n, char *base, char *buffer);
+// spec_utils
+int		calc_str_len(char *s, int length, t_specs specs);
+int		print_width(int length, t_specs specs);
+int		print_string(char *s, int string_length, t_specs specs);
 
 #endif

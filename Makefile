@@ -6,7 +6,11 @@
 #    By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/16 21:18:17 by alkonsta          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2026/10/23 00:54:19 by alkonsta         ###   ########.fr        #
+=======
+#    Updated: 2026/10/28 23:53:29 by alkonsta         ###   ########.fr        #
+>>>>>>> main
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +20,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_printf.c \
-       str_utils.c \
+       parser_specs.c \
        formatters_int.c \
-       formatters_char.c
+       formatters_char.c \
+       formatters_specs.c \
+       utils_specs.c \
+       utils_str.c
 
 OBJDIR = ./libftprintf
 OBJS = $(SRCS:.c=.o)
@@ -28,7 +35,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-# bonus: $(NAME)
+bonus: $(NAME)
 
 clean:
 	rm -f $(OBJS)
