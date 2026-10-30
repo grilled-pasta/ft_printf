@@ -12,13 +12,20 @@
 
 #include "ft_printf.h"
 
+int	sign_len(char *s)
+{
+	if (*s == '0' && *(s + 1) && (*(s + 1) == 'x' || *(s + 1) == 'X'))
+		return (2);
+	return (*s == '-' || *s == '+' || *s == ' ');
+}
+
 int	calc_str_len(char *s, int length, t_specs specs)
 {
 	int	result_length;
 	int	sign;
 
 	result_length = 0;
-	sign = (*s == '-' || *s == '+' || *s == ' ');
+	sign = sign_len(s);
 	if (specs.precision > length - sign)
 		result_length += specs.precision - length + sign;
 	result_length += length;
@@ -52,10 +59,10 @@ int	print_string(char *s, int string_length, t_specs specs)
 	int	sign;
 
 	zeroes = 0;
-	sign = has_sign(s);
+	sign = sign_len(s);
 	if (sign && !(specs.flags.leading_zeroes && specs.precision == -1)
 		&& !specs.flags.left_justify)
-		if (ft_putchar(*s) < 0)
+		if (ft_putnstr(s, sign) < 0)
 			return (-1);
 	if (specs.precision > string_length - sign)
 	{
@@ -70,9 +77,4 @@ int	print_string(char *s, int string_length, t_specs specs)
 	if (length < 0)
 		return (-1);
 	return (length + zeroes + sign);
-}
-
-int	has_sign(char *s)
-{
-	return (*s == '-' || *s == '+' || *s == ' ');
 }

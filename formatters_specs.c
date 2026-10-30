@@ -46,12 +46,12 @@ static int	format_number(char *s, int length, t_specs specs)
 	int		width_length;
 	int		result_length;
 
-	if (!*s || (specs.precision == 0 && *s == '0'))
+	if (s && (!*s || (specs.precision == 0 && *s == '0' && !*(s + 1))))
 		length = 0;
 	if (specs.flags.left_justify)
 	{
-		if (has_sign(s))
-			if (ft_putchar(*s) < 0)
+		if (sign_len(s))
+			if (ft_putnstr(s, sign_len(s)) < 0)
 				return (-1);
 		result_length = print_string(s, length, specs);
 		width_length = print_width(specs.min_width - result_length, specs);
@@ -59,8 +59,8 @@ static int	format_number(char *s, int length, t_specs specs)
 	else
 	{
 		result_length = calc_str_len(s, length, specs);
-		if (has_sign(s) && specs.flags.leading_zeroes && specs.precision == -1)
-			if (ft_putchar(*s) < 0)
+		if (sign_len(s) && specs.flags.leading_zeroes && specs.precision == -1)
+			if (ft_putnstr(s, sign_len(s)) < 0)
 				return (-1);
 		width_length = print_width(specs.min_width - result_length, specs);
 		result_length = print_string(s, length, specs);
