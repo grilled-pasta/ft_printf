@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stddef.h>
-#include <unistd.h>
-#include <stdint.h>
 #include <errno.h>
 #include <limits.h>
 
@@ -22,8 +19,6 @@ int	handle_formatter(const char **format, va_list args)
 	t_specs	specs;
 
 	specs = parse_specs(format);
-	if (!specs.specifier)
-		return (-1);
 	if (specs.specifier == 'c')
 		return (format_c(args, specs));
 	else if (specs.specifier == 's')

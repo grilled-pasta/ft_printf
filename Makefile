@@ -16,12 +16,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = ft_printf.c \
-       str_utils.c \
+       parser_specs.c \
        formatters_int.c \
        formatters_char.c \
        formatters_specs.c \
-       spec_utils.c \
-       spec_parser.c
+       utils_specs.c \
+       utils_str.c
 
 OBJDIR = ./libftprintf
 OBJS = $(SRCS:.c=.o)
