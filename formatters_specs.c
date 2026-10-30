@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	format_string(char *s, int lenght, t_specs specs)
+static int	format_string(char *s, int lenght, t_specs specs)
 {
 	int	width_length;
 	int	string_length;
@@ -39,7 +39,7 @@ int	format_string(char *s, int lenght, t_specs specs)
 	return (string_length + width_length);
 }
 
-int	format(char *s, int length, t_specs specs)
+static int	format_number(char *s, int length, t_specs specs)
 {
 	int		width_length;
 	int		result_length;
@@ -72,5 +72,5 @@ int	format_specs(char *s, int length, t_specs specs)
 {
 	if (specs.specifier == 's' || specs.specifier == 'c')
 		return (format_string(s, length, specs));
-	return (format(s, length, specs));
+	return (format_number(s, length, specs));
 }
