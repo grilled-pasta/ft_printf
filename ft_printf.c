@@ -43,26 +43,6 @@ int	handle_error(int error)
 	return (error);
 }
 
-<<<<<<< HEAD
-int	handle_formatter(char format, va_list args)
-{
-	if (format == 'c')
-		return (format_c(args));
-	else if (format == 's')
-		return (format_s(args));
-	else if (format == 'p')
-		return (format_p(args));
-	else if (format == 'd' || format == 'i')
-		return (format_int(args));
-	else if (format == 'u')
-		return (format_u(args));
-	else if (format == 'x' || format == 'X')
-		return (format_x(args, format));
-	else if (format == '%')
-		return (ft_putchar('%'));
-	return (0);
-}
-
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
