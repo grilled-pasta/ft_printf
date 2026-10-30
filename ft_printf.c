@@ -35,7 +35,7 @@ int	handle_formatter(const char **format, va_list args)
 	else if (specs.specifier == 'u')
 		return (format_u(args, specs));
 	else if (specs.specifier == 'x' || specs.specifier == 'X')
-		return (format_x(args, specs.specifier, specs));
+		return (format_x(args, specs));
 	else if (specs.specifier == '%')
 		return (ft_putchar('%'));
 	return (-1);

@@ -34,6 +34,11 @@ int	format_s(va_list args, t_specs specs)
 
 	temp = (char *) va_arg(args, char *);
 	if (!temp)
-		temp = "(null)";
+	{
+		if (specs.precision >= 0 && specs.precision < 6)
+			temp = "";
+		else
+			temp = "(null)";
+	}
 	return (format_specs(temp, ft_strlen(temp), specs));
 }

@@ -53,7 +53,7 @@ int		format_s(va_list args, t_specs specs);
 int		format_p(va_list args, t_specs specs);
 int		format_int(va_list args, t_specs specs);
 int		format_u(va_list args, t_specs specs);
-int		format_x(va_list args, char format, t_specs specs);
+int		format_x(va_list args, t_specs specs);
 // specs
 t_specs	parse_specs(const char **format);
 // spec_utils
