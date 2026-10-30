@@ -52,7 +52,7 @@ int	print_string(char *s, int string_length, t_specs specs)
 	int	sign;
 
 	zeroes = 0;
-	sign = (*s == '-' || *s == '+' || *s == ' ');
+	sign = has_sign(s);
 	if (sign && !(specs.flags.leading_zeroes && specs.precision == -1)
 		&& !specs.flags.left_justify)
 		if (ft_putchar(*s) < 0)
@@ -70,4 +70,9 @@ int	print_string(char *s, int string_length, t_specs specs)
 	if (length < 0)
 		return (-1);
 	return (length + zeroes + sign);
+}
+
+int	has_sign(char *s)
+{
+	return (*s == '-' || *s == '+' || *s == ' ');
 }

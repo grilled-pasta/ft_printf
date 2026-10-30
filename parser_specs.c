@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-int	is_flag(char c)
+static int	is_flag(char c)
 {
 	return (c == '-' || c == '0' || c == '+' || c == ' ' || c == '#');
 }
 
-t_flags	parse_flags(const char **format)
+static t_flags	parse_flags(const char **format)
 {
 	t_flags	flags;
 
@@ -43,20 +43,24 @@ t_flags	parse_flags(const char **format)
 	return (flags);
 }
 
-int	ft_isspec(char c)
+static int	ft_isspec(char c)
 {
 	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
 		|| c == 'u' || c == 'x' || c == 'X' || c == '%');
 }
 
-int	parse_number(const char **format)
+static int	parse_number(const char **format)
 {
 	int	width;
+	int	digit;
 
 	width = 0;
 	while (**format && (**format >= '0' && **format <= '9'))
 	{
-		width = width * 10 + (**format - '0');
+		digit = (**format - '0');
+		if (width > (INT_MAX - digit) / 10)
+			return (-1);
+		width = width * 10 + digit;
 		(*format)++;
 	}
 	return (width);
@@ -66,19 +70,20 @@ t_specs	parse_specs(const char **format)
 {
 	t_specs	specs;
 	t_flags	flags;
-	int		precision;
 
 	flags = parse_flags(format);
 	specs.flags = flags;
-	specs.min_width = -1;
+	specs.min_width = parse_number(format);
 	specs.precision = -1;
 	specs.specifier = '\0';
-	specs.min_width = parse_number(format);
-	precision = 0;
+	if (specs.min_width < 0)
+		return (specs);
 	if (**format == '.')
 	{
 		(*format)++;
 		specs.precision = parse_number(format);
+		if (specs.precision < 0)
+			return (specs);
 	}
 	if (**format && ft_isspec(**format))
 		specs.specifier = **format;

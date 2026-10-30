@@ -36,19 +36,19 @@ int	ft_putnbr_base(unsigned long n, char *base, char *buffer)
 {
 	int		length;
 	size_t	base_length;
-	int		temp;
+	int		res;
 
 	length = 0;
-	temp = 0;
+	res = 0;
 	if (!base || ft_strlen(base) < 2 || !buffer)
 		return (-1);
 	base_length = ft_strlen(base);
 	if (n >= base_length)
 	{
-		temp = ft_putnbr_base(n / base_length, base, buffer);
-		if (temp < 0)
-			return (temp);
-		length = temp;
+		res = ft_putnbr_base(n / base_length, base, buffer);
+		if (res < 0)
+			return (res);
+		length = res;
 	}
 	buffer[length] = base[n % base_length];
 	return (length + 1);

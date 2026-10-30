@@ -16,15 +16,11 @@ int	format_c(va_list args, t_specs specs)
 {
 	char	temp;
 	char	str[2];
-	int		length;
 
 	temp = (unsigned char) va_arg(args, int);
 	str[0] = temp;
 	str[1] = '\0';
-	length = format_specs(str, 1, specs);
-	if (length < 0)
-		return (length);
-	return (length);
+	return (format_specs(str, 1, specs));
 }
 
 int	format_s(va_list args, t_specs specs)
