@@ -25,7 +25,8 @@ int	format_p(va_list args, t_specs specs)
 		return (format_specs("(nil)", 5, specs));
 	buffer[0] = '0';
 	buffer[1] = 'x';
-	length = ft_putnbr_base((unsigned long) temp, BASE_16_L, buffer + sign);
+	length = ft_putnbr_base((unsigned long) temp, "0123456789abcdef", buffer
+			+ sign);
 	buffer[length + sign] = '\0';
 	if (length < 0)
 		return (-1);
@@ -42,27 +43,19 @@ int	format_int(va_list args, t_specs specs)
 
 	temp = va_arg(args, int);
 	n = temp;
-	length = 0;
-	sign = 0;
+	sign = (n < 0 || specs.flags.plus || specs.flags.space);
 	if (n == 0 && specs.precision == 0)
 		return (buffer[0] = '\0', format_specs(buffer, 0, specs));
 	if (n < 0)
 	{
 		buffer[0] = '-';
-		sign = 1;
 		n = -n;
-	}	
+	}
 	else if (specs.flags.plus)
-	{
 		buffer[0] = '+';
-		sign = 1;
-	}
 	else if (specs.flags.space)
-	{
 		buffer[0] = ' ';
-		sign = 1;
-	}
-	length = ft_putnbr_base(n, BASE_10, buffer + sign);
+	length = ft_putnbr_base(n, "0123456789", buffer + sign);
 	buffer[length + sign] = '\0';
 	if (length < 0)
 		return (-1);
@@ -89,7 +82,7 @@ int	format_u(va_list args, t_specs specs)
 		buffer[0] = ' ';
 		sign = 1;
 	}
-	length = ft_putnbr_base(temp, BASE_10, buffer + sign);
+	length = ft_putnbr_base(temp, "0123456789", buffer + sign);
 	if (length < 0)
 		return (-1);
 	buffer[length + sign] = '\0';
@@ -108,9 +101,9 @@ int	format_x(va_list args, t_specs specs)
 	length = 0;
 	sign = 0;
 	if (specs.specifier == 'X')
-		base = BASE_16_U;
+		base = "0123456789ABCDEF";
 	else
-		base = BASE_16_L;
+		base = "0123456789abcdef";
 	if (specs.flags.hashtag && temp)
 	{
 		buffer[0] = '0';

@@ -44,7 +44,7 @@ int	handle_formatter(const char **format, va_list args)
 int	handle_error(int error)
 {
 	errno = error;
-	ft_putstr("Invalid input\n");
+	ft_putnstr("Error!\n", 7);
 	return (error);
 }
 

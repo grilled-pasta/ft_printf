@@ -12,6 +12,19 @@
 
 #include "ft_printf.h"
 
+int	calc_str_len(char *s, int length, t_specs specs)
+{
+	int	result_length;
+	int	sign;
+
+	result_length = 0;
+	sign = (*s == '-' || *s == '+' || *s == ' ');
+	if (specs.precision > length - sign)
+		result_length += specs.precision - length + sign;
+	result_length += length;
+	return (result_length);
+}
+
 int	print_width(int length, t_specs specs)
 {
 	int		width_length;
@@ -31,8 +44,6 @@ int	print_width(int length, t_specs specs)
 	}
 	return (width_length);
 }
-
-#include <stdio.h>
 
 int	print_string(char *s, int string_length, t_specs specs)
 {

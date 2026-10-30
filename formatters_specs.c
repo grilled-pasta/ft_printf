@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	format_string(char *s, int lenght, t_specs specs)
 {
@@ -22,11 +21,11 @@ int	format_string(char *s, int lenght, t_specs specs)
 	string_length = lenght;
 	if (specs.precision == 0 && specs.specifier != 'c')
 		string_length = 0;
-	if (specs.precision > 0 && specs.precision < string_length 
+	if (specs.precision > 0 && specs.precision < string_length
 		&& specs.specifier != 'c')
 		string_length = specs.precision;
-	if (specs.flags.left_justify && (specs.precision != 0 
-		|| specs.specifier == 'c'))
+	if (specs.flags.left_justify && (specs.precision != 0
+			|| specs.specifier == 'c'))
 		ft_putnstr(s, string_length);
 	while (width_length < specs.min_width - string_length)
 	{
@@ -34,23 +33,10 @@ int	format_string(char *s, int lenght, t_specs specs)
 			return (-1);
 		width_length++;
 	}
-	if (!specs.flags.left_justify && (specs.precision != 0 
-		|| specs.specifier == 'c'))
+	if (!specs.flags.left_justify && (specs.precision != 0
+			|| specs.specifier == 'c'))
 		ft_putnstr(s, string_length);
 	return (string_length + width_length);
-}
-
-int	calc_str_len(char *s, int length, t_specs specs)
-{
-	int	result_length;
-	int	sign;
-
-	result_length = 0;
-	sign = (*s == '-' || *s == '+' || *s == ' ');
-	if (specs.precision > length - sign)
-		result_length += specs.precision - length + sign;
-	result_length += length;
-	return (result_length);
 }
 
 int	format(char *s, int length, t_specs specs)
@@ -59,13 +45,11 @@ int	format(char *s, int length, t_specs specs)
 	int		result_length;
 	int		sign;
 
-	width_length = 0;
-	result_length = 0;
 	if (specs.precision == 0 && *s == '0')
 		length = 0;
 	sign = (*s == '-' || *s == '+' || *s == ' ');
 	if (specs.flags.left_justify)
-	{		
+	{
 		if (sign)
 			if (ft_putchar(*s) < 0)
 				return (-1);
