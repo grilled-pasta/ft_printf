@@ -6,11 +6,7 @@
 /*   By: alkonsta <alkonsta@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 21:19:41 by alkonsta          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/10/23 00:49:17 by alkonsta         ###   ########.fr       */
-=======
 /*   Updated: 2026/10/24 01:07:18 by alkonsta         ###   ########.fr       */
->>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +63,16 @@ int	handle_formatter(char format, va_list args)
 	return (0);
 }
 
-/* %[flags][width][.precision][length]specifier */
-int	ft_printf(const char *format, ...)
-{
-	va_list	args;
-	size_t	length;
-=======
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		length;
 	int		temp;
->>>>>>> main
 
 	length = 0;
 	va_start(args, format);
 	while (format && *format)
 	{
-<<<<<<< HEAD
-		if (*format == '%')
-		{
-			format++;
-			length += handle_formatter(*format, args);
-		}
-		else
-			length += ft_putchar(*format);
-=======
 		if (*format == '%' && *(format + 1))
 		{
 			format++;
@@ -105,7 +85,6 @@ int	ft_printf(const char *format, ...)
 		if (INT_MAX - length < temp)
 			return (va_end(args), handle_error(EOVERFLOW));
 		length += temp;
->>>>>>> main
 		format++;
 	}
 	va_end(args);
