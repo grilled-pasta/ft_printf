@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdarg.h>
+# include <limits.h>
 
 typedef struct s_flags
 {
@@ -35,7 +36,7 @@ typedef struct s_specs
 
 int		ft_printf(const char *format, ...);
 t_specs	parse_specs(const char **format);
-// formatters_char 
+// formatters_char
 int		format_c(va_list args, t_specs specs);
 int		format_s(va_list args, t_specs specs);
 // formatters_int
@@ -54,5 +55,6 @@ int		ft_putnbr_base(unsigned long n, char *base, char *buffer);
 int		calc_str_len(char *s, int length, t_specs specs);
 int		print_width(int length, t_specs specs);
 int		print_string(char *s, int string_length, t_specs specs);
+int		has_sign(char *s);
 
 #endif

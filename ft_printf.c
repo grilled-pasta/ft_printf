@@ -12,13 +12,14 @@
 
 #include "ft_printf.h"
 #include <errno.h>
-#include <limits.h>
 
-int	handle_formatter(const char **format, va_list args)
+static int	handle_formatter(const char **format, va_list args)
 {
 	t_specs	specs;
 
 	specs = parse_specs(format);
+	if (!specs.specifier)
+		return (-1);
 	if (specs.specifier == 'c')
 		return (format_c(args, specs));
 	else if (specs.specifier == 's')
@@ -36,10 +37,10 @@ int	handle_formatter(const char **format, va_list args)
 	return (-1);
 }
 
-int	handle_error(int error)
+static int	handle_error(int error)
 {
-	errno = error;
-	ft_putnstr("Error!\n", 7);
+	if (error == EOVERFLOW)
+		errno = error;
 	return (error);
 }
 

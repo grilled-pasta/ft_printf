@@ -23,11 +23,10 @@ SRCS = ft_printf.c \
        utils_specs.c \
        utils_str.c
 
-OBJDIR = ./libftprintf
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
-	
+
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
